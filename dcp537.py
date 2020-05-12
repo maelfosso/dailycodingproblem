@@ -16,3 +16,47 @@ We will be sending the solution tomorrow, along with tomorrow's question. As alw
 Have a great day!
 """
 
+def collatz(n):
+  s = n
+  seq = [s]
+  while s != 1:
+    if s % 2 == 0:
+      s = s / 2
+    else:
+      s = 3 * s + 1
+
+    seq.append(int(s))
+
+  return seq
+
+def longest(max):
+  min = 0
+  value = 0
+  seq_len = dict()
+
+  for n in range(2, max + 1):
+    s = n
+    seq = [s]
+    while s != 1:
+      if s in seq_len:
+        seq_len[n] = len(seq) + seq_len[s]
+        break
+      else:
+        if s % 2 == 0:
+          s = s / 2
+        else:
+          s = 3 * s + 1
+
+        seq.append(int(s))
+    
+    if s == 1:
+      seq_len[n] = len(seq)
+
+    if min < len(seq):
+      min = len(seq)
+      value = n
+
+  return n, min
+
+    
+
